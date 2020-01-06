@@ -1,1 +1,1 @@
-# Brownian-dynamics-of-in-vivo-DNA
+# Stochastic-dynamics-of-in-vivo-DNA
