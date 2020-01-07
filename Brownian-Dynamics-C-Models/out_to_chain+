@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+system("rm -r prot_1_frames");
+system("mkdir prot_1_frames");
+
+$N=50;  
+
+open FH1, "prot_1.out";
+open FH2, ">>./prot_1_frames/0.pdb";
+
+$j=0;
+$k=1;
+
+while ($_ = <FH1>) {
+	if (/(\S+)\s+(\S+)\s+(\S+)/) {
+			printf FH2 "ATOM   %0.5d CA       %.4d    %8.3f%8.3f%8.3f\n",$k,$k,$1,$2,$3;
+			$j+=1;
+			$k+=1;
+
+		if($j%(2.0*$N-1)==0){
+			$k=1;		
+			$i=$j/(2.0*$N-1);	
+			open FH2, ">>./prot_1_frames/$i.pdb";
+		}
+	}
+}
+system("rm ./prot_1_frames/$i.pdb");
